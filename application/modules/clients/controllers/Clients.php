@@ -207,10 +207,11 @@ class Clients extends Admin_Controller
         $this->layout->set(
             array(
                 'client' => $client,
+                // #863 - removed query limits as the page does not have Pagination of results within the tabs.
                 'client_notes' => $this->mdl_client_notes->where('client_id', $client_id)->get()->result(),
-                'invoices' => $this->mdl_invoices->by_client($client_id)->limit(20)->get()->result(),
-                'quotes' => $this->mdl_quotes->by_client($client_id)->limit(20)->get()->result(),
-                'payments' => $this->mdl_payments->by_client($client_id)->limit(20)->get()->result(),
+                'invoices' => $this->mdl_invoices->by_client($client_id)->get()->result(),
+                'quotes' => $this->mdl_quotes->by_client($client_id)->get()->result(),
+                'payments' => $this->mdl_payments->by_client($client_id)->get()->result(),
                 'custom_fields' => $custom_fields,
                 'quote_statuses' => $this->mdl_quotes->statuses(),
                 'invoice_statuses' => $this->mdl_invoices->statuses()
